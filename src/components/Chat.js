@@ -1,6 +1,7 @@
 // ui component that will render a chat interface
 import React, { useEffect, useRef } from 'react';
 import useChat from '../hooks/useChat';
+import { uploadFile } from '../service/fileService';
 import './chat.css';
 
 export default function Chat() {
@@ -13,7 +14,7 @@ export default function Chat() {
     error,
     liveAnswer
   } = useChat();
-  
+
   const lastMessageRef = useRef(null);
   useEffect(() => {
     if (lastMessageRef.current) {
@@ -26,6 +27,7 @@ export default function Chat() {
     if (file) {
       // Handle file upload logic here
       console.log('File selected:', file.name);
+      uploadFile(file)
       // Reset input
       event.target.value = '';
     }
